@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Eventos</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" >
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <h1 th:text="${titulo}"></h1>
+        <table class="table table-dark table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <td scope="col">Nombre </td>
+                    <td scope="col">Precio</td>
+                    <td scope="col">Capacidad</td>
+                    <td scope="col">Lugar</td>
+                    <td scope="col">Fecha</td>
+                    <td scope="col">Artista</td>
+                    <td scope="col">Editar </td>
+                    <td scope="col">Eliminar </td>
+                </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="evento : ${eventos}">
+                <tr>
+                    <td th:text="${evento.getNombre}"></td>
+                    <td th:text="${evento.getPrecio}"></td>
+                    <td th:text="${evento.getCapacidad}"></td>
+                    <td th:text="${evento.getLugar}"></td>
+                    <td th:text="${evento.getFecha}"></td>
+                    <td th:text="${evento.getArtista.getNombre}"></td>
+                    <td>
+                        <a th:href="@{/editEvento/{id}(id=${evento.getId})}">Edit</a>
+                    </td>
+                    <td>
+                        <a th:href="@{/delete/{id}(id=${evento.getId})}">Delete</a>
+                    </td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+        <form action="/eventosN">
+            <input type="submit" value="Nuevo Evento">
+        </form>
+    </body>
+</html>
